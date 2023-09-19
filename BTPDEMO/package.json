@@ -1,0 +1,38 @@
+{
+  "name": "BTPDEMO",
+  "version": "1.0.0",
+  "description": "My First CAP Project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap/cds": "^7",
+    "@sap/cds-hana": "^2",
+    "@sap/cds-odata-v2-adapter-proxy": "^1.9.7",
+    "express": "^4"
+  },
+  "devDependencies": {
+    "@cap-js/sqlite": "^1",
+    "@sap/cds-dk": "^7",
+    "@sap/ux-specification": "^1.108.14",
+    "rimraf": "^3.0.2"
+  },
+  "scripts": {
+    "start": "cds-serve",
+    "watch-purchaseordersapp": "cds watch --open purchaseordersapp/webapp/index.html?sap-ui-xx-viewCache=false",
+    "undeploy": "cf undeploy BTPDEMO --delete-services --delete-service-keys --delete-service-brokers",
+    "build": "rimraf resources mta_archives && mbt build --mtar archive",
+    "deploy": "cf deploy mta_archives/archive.mtar --retries 1"
+  },
+  "sapux": [
+    "app/purchaseordersapp"
+  ],
+  "cds": {
+    "requires": {
+      "db": "hana"
+    },
+    "hana": {
+      "deploy.format": "hdbtable"
+    }
+  }
+}
